@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MvcMonster.Models.Monster>
+﻿@model MvcMonster.Models.MonsterTypeViewModel
 
 @{
     ViewData["Title"] = "Index";
@@ -9,8 +9,12 @@
 <p>
     <a asp-action="Create">Create New</a>
 </p>
-<form asp-controller="Monsters" asp-action="Index">
+<form asp-controller="Monsters" asp-action="Index" method="get">
     <p>
+        <select asp-for="MonsterType" asp-items="Model.Types">
+            <option value="">All</option>
+        </select>
+
         Called: <input type="text" name="searchString" />
         <input type="submit" value="Filter" />
     </p>
@@ -19,22 +23,22 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Called)
+                @Html.DisplayNameFor(model => model.Monsters[0].Called)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Type)
+                @Html.DisplayNameFor(model => model.Monsters[0].Type)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Hp)
+                @Html.DisplayNameFor(model => model.Monsters[0].Hp)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Damage)
+                @Html.DisplayNameFor(model => model.Monsters[0].Damage)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Monsters) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Called)

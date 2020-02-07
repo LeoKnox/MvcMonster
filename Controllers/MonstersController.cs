@@ -20,8 +20,12 @@ namespace MvcMonster.Controllers
         }
 
         // GET: Monsters
-        public async Task<IActionResult> Index(string searchString)
+        public async Task<IActionResult> Index(string monsterType, string searchString)
         {
+            IQueryable<string> typeQuery = from m in _context.Monster
+                                           orderby m.Type
+                                           select m.Type;
+
             var monsters = from m in _context.Monster
                          select m;
 
@@ -29,7 +33,19 @@ namespace MvcMonster.Controllers
             {
                 monsters = monsters.Where(s => s.Called.Contains(searchString));
             }
-            return View(await monsters.ToListAsync());
+
+            if (!string.IsNullOrEmpty(monsterType))
+            {
+                monsters = monsters.Where(x => x.Type == monsterType);
+            }
+
+            var monsterTypeVM = new MonsterTypeViewModel
+            {
+                Types = new SelectList(await typeQuery.Distinct().ToListAsync()),
+                Monsters = await monsters.ToListAsync()
+            };
+
+            return View(monsterTypeVM);
         }
 
         // GET: Monsters/Details/5

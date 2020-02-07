@@ -11,6 +11,7 @@ namespace MvcMonster.Models
         public int Id { get; set; }
         public string Called { get; set; }
         public string Type { get; set; }
+        [Display(Name = "Max HP")]
         public int Hp { get; set; }
         public int Damage { get; set; }
     }
