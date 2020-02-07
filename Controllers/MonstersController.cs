@@ -77,7 +77,7 @@ namespace MvcMonster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Called,Type,Hp,Damage")] Monster monster)
+        public async Task<IActionResult> Create([Bind("Id,Called,Type,Hp,Damage,Defense")] Monster monster)
         {
             if (ModelState.IsValid)
             {
@@ -109,7 +109,7 @@ namespace MvcMonster.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Called,Type,Hp,Damage")] Monster monster)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Called,Type,Hp,Damage,Defense")] Monster monster)
         {
             if (id != monster.Id)
             {

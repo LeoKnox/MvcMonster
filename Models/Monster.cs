@@ -14,5 +14,6 @@ namespace MvcMonster.Models
         [Display(Name = "Max HP")]
         public int Hp { get; set; }
         public int Damage { get; set; }
+        public int Defense { get; set; }
     }
 }
